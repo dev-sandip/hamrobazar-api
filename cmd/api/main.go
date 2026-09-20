@@ -7,17 +7,20 @@ import (
 	"time"
 
 	"github.com/dev-sandip/hamrobazar-api/cmd/internal/config"
+	"github.com/dev-sandip/hamrobazar-api/cmd/internal/db"
+	"github.com/dev-sandip/hamrobazar-api/cmd/internal/handlers"
 )
 
 func main() {
 	cfg := config.MustLoad()
+	_, err := db.Connect(cfg.DATABASE_URL)
+	if err != nil {
+		log.Fatalf("Failed to connect to database: %v", err)
+	}
+	log.Default().Println("Database Connection Established!")
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("GET /healthz", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(`{"status": "ok"}`))
-	})
+	mux.HandleFunc("GET /healthz", handlers.Health)
 
 	srv := &http.Server{
 		Addr:         ":" + cfg.Port,
