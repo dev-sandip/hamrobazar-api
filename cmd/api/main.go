@@ -6,9 +6,9 @@ import (
 	_ "net/http/pprof"
 	"time"
 
-	"github.com/dev-sandip/hamrobazar-api/cmd/internal/config"
-	"github.com/dev-sandip/hamrobazar-api/cmd/internal/db"
-	"github.com/dev-sandip/hamrobazar-api/cmd/internal/handlers"
+	"github.com/dev-sandip/hamrobazar-api/internal/config"
+	"github.com/dev-sandip/hamrobazar-api/internal/db"
+	"github.com/dev-sandip/hamrobazar-api/internal/handlers"
 )
 
 func main() {
