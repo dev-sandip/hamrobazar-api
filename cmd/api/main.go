@@ -13,7 +13,7 @@ func main() {
 	cfg := config.MustLoad()
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("GET /health", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("GET /healthz", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte(`{"status": "ok"}`))
@@ -27,7 +27,7 @@ func main() {
 		IdleTimeout:  time.Second * 60,
 	}
 
-	log.Printf("Server is running on port %s", cfg.Port)
+	log.Printf("Server is running on port http://localhost:%s", cfg.Port)
 	if err := srv.ListenAndServe(); err != nil {
 		log.Fatalf("Server Failed : %v", err)
 	}
