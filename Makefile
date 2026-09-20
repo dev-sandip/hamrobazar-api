@@ -1,10 +1,10 @@
 .PHONY: build run clean
 
 build:
-	@ go build -o bin/main cmd/api/main.go
+	@ go build -o bin/api cmd/api/main.go
 
 run: build
-	@ ./bin/main
+	@ ./bin/api
 
 clean:
 	@ rm -rf bin
